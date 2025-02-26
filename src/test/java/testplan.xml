@@ -1,0 +1,9 @@
+<suite name="Suite1" verbose="1">
+    <test name="Chrome browser">
+        <parameter name="browser" value="Chrome"/>
+        <parameter name="url" value="https://the-internet.herokuapp.com/"/>
+        <classes>
+            <class name="internet.FormAuthenticationTest"/>
+        </classes>
+    </test>
+</suite>
