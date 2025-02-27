@@ -1,9 +1,7 @@
 <suite name="Suite1" verbose="1">
-    <test name="Chrome browser">
-        <parameter name="browser" value="Chrome"/>
-        <parameter name="url" value="https://the-internet.herokuapp.com/"/>
+    <test name="Todo MVC">
         <classes>
-            <class name="internet.FormAuthenticationTest"/>
+            <class name="practice.TodoMVCTest"/>
         </classes>
     </test>
 </suite>

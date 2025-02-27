@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 import pages.TodoMVCTestPage;
 
@@ -14,10 +15,12 @@ public class TodoMVCTest {
         Navigate to https://todomvc.com/examples/react/dist/
         Enter a new todo name
         Verify a todo added
+
     * */
+    WebDriver driver;
     @Test
     void ableCreateNewTodo() {
-        WebDriver driver = new ChromeDriver();
+        driver = new ChromeDriver();
         Actions actions = new Actions(driver);
         TodoMVCTestPage todoMVCTestPage = new TodoMVCTestPage(actions, driver);
 
@@ -41,7 +44,7 @@ public class TodoMVCTest {
             Verify a todo is marked completed
         * */
 
-        WebDriver driver = new ChromeDriver();
+        driver = new ChromeDriver();
         Actions actions = new Actions(driver);
         TodoMVCTestPage todoMVCTestPage = new TodoMVCTestPage(actions, driver);
 
@@ -67,7 +70,7 @@ public class TodoMVCTest {
             Verify a todo deleted
         * */
 
-        WebDriver driver = new ChromeDriver();
+        driver = new ChromeDriver();
         Actions actions = new Actions(driver);
         TodoMVCTestPage todoMVCTestPage = new TodoMVCTestPage(actions, driver);
         todoMVCTestPage.navigateToTodoMVC();
@@ -78,10 +81,15 @@ public class TodoMVCTest {
         String todo2 = "Write a letter for my future2";
         todoMVCTestPage.createNewTodo(todo2);
 
+        int sizeBefore = todoMVCTestPage.getItemLeft();
+
         Assert.assertTrue(todoMVCTestPage.getTask(todo1).isDisplayed());
         Assert.assertTrue(todoMVCTestPage.getTask(todo2).isDisplayed());
 
         todoMVCTestPage.deleteTask(todo1);
+
+        int sizeAfter = todoMVCTestPage.getItemLeft();
+        Assert.assertEquals(sizeBefore - sizeAfter , 1);
         Assert.assertFalse(todoMVCTestPage.isTaskExist(todo1));
     }
 
@@ -94,7 +102,7 @@ public class TodoMVCTest {
                     Update a existed todo name
                     Verify a todo updated name successfully
         * */
-        WebDriver driver = new ChromeDriver();
+        driver = new ChromeDriver();
         Actions actions = new Actions(driver);
         TodoMVCTestPage todoMVCTestPage = new TodoMVCTestPage(actions, driver);
 
@@ -112,5 +120,10 @@ public class TodoMVCTest {
         Assert.assertTrue(todoMVCTestPage.isTaskExist(updateTaskName));
         System.out.println(todoMVCTestPage.getTask(updateTaskName).getText());
 
+    }
+
+    @AfterMethod
+    void tearDown() {
+        driver.quit();
     }
 }
