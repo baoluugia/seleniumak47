@@ -1,7 +1,0 @@
-<suite name="Suite1" verbose="1">
-    <test name="Todo MVC">
-        <classes>
-            <class name="practice.TodoMVCTest"/>
-        </classes>
-    </test>
-</suite>

@@ -1,16 +1,7 @@
-<suite name="Sample" parallel="tests" thread-count="2">
-    <test name="Edge Browser">
-        <parameter name="browser" value="edge"/>
-        <parameter name="url" value="https://the-internet.herokuapp.com"/>
+<suite name="Suite1" verbose="1">
+    <test name="Todo MVC">
         <classes>
-            <class name="internet.FormAuthenticationTest"/>
-        </classes>
-    </test>
-    <test name="Chrome Browser">
-        <parameter name="browser" value="chrome"/>
-        <parameter name="url" value="https://the-internet.herokuapp.com"/>
-        <classes>
-            <class name="internet.FormAuthenticationTest"/>
+            <class name="practice.TodoMVCTest"/>
         </classes>
     </test>
 </suite>
