@@ -2,9 +2,11 @@ package practice;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.TodoMVCTestPage;
 
@@ -18,11 +20,21 @@ public class TodoMVCTest {
 
     * */
     WebDriver driver;
+    TodoMVCTestPage todoMVCTestPage;
+    @BeforeMethod
+    void setUp(){
+
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--headless=new");
+        driver = new ChromeDriver(chromeOptions);
+
+        Actions actions = new Actions(driver);
+
+        todoMVCTestPage = new TodoMVCTestPage(actions, driver);
+
+    }
     @Test
     void ableCreateNewTodo() {
-        driver = new ChromeDriver();
-        Actions actions = new Actions(driver);
-        TodoMVCTestPage todoMVCTestPage = new TodoMVCTestPage(actions, driver);
 
         todoMVCTestPage.navigateToTodoMVC();
         int numberItemLeftBefore = todoMVCTestPage.getItemLeft();
@@ -43,10 +55,6 @@ public class TodoMVCTest {
             Mark completed a exist todo
             Verify a todo is marked completed
         * */
-
-        driver = new ChromeDriver();
-        Actions actions = new Actions(driver);
-        TodoMVCTestPage todoMVCTestPage = new TodoMVCTestPage(actions, driver);
 
         todoMVCTestPage.navigateToTodoMVC();
         String todo1 = "Write a letter for my future";
@@ -70,9 +78,6 @@ public class TodoMVCTest {
             Verify a todo deleted
         * */
 
-        driver = new ChromeDriver();
-        Actions actions = new Actions(driver);
-        TodoMVCTestPage todoMVCTestPage = new TodoMVCTestPage(actions, driver);
         todoMVCTestPage.navigateToTodoMVC();
 
         String todo1 = "Write a letter for my future1";
@@ -102,9 +107,6 @@ public class TodoMVCTest {
                     Update a existed todo name
                     Verify a todo updated name successfully
         * */
-        driver = new ChromeDriver();
-        Actions actions = new Actions(driver);
-        TodoMVCTestPage todoMVCTestPage = new TodoMVCTestPage(actions, driver);
 
         todoMVCTestPage.navigateToTodoMVC();
 
